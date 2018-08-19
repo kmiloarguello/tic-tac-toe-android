@@ -24,7 +24,41 @@
         app:srcCompat="@drawable/red" />
 
     <ImageView
+        android:id="@+id/redChip2"
+        android:layout_width="125dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="65dp"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/redChip3"
+        android:layout_width="125dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="65dp"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
         android:id="@+id/yellowChip"
+        android:layout_width="125dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/redChip"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/yellowChip2"
+        android:layout_width="125dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/redChip"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/yellowChip3"
         android:layout_width="125dp"
         android:layout_height="120dp"
         android:layout_alignParentStart="true"
