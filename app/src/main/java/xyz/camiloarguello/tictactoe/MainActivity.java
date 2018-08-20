@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         turn = 0;
+        LinearLayout layout = findViewById(R.id.playAgainLayout);
+        layout.setTranslationY(-1000f);
     }
 
     public void dropInChip(View view){
@@ -42,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
             // If it's pair number puts the reds. Otherwise puts yellows
             if(turn == 0){
                 counter.setImageResource(R.drawable.red);
-                decideWinner("Red Won!");
+                decideWinner("Red Won!",R.color.redColor);
                 turn = 1;
             }else{
                 counter.setImageResource(R.drawable.yellow);
-                decideWinner("Yellow won!");
+                decideWinner("Yellow won!",R.color.yellowColor);
                 turn = 0;
             }
 
@@ -58,25 +60,17 @@ public class MainActivity extends AppCompatActivity {
                     .rotation(360f)
                     .setDuration(500);
 
-        }else{
-            boolean gameIsOver = true;
-
-            for(int boxState : boxes){
-                if(boxState == 2) gameIsOver = false;
-            }
-            if(gameIsOver){
-                decideWinner("It is a draw");
-            }
         }
     }
-    public void decideWinner(String message){
-
-        isActive = false;
+    public void decideWinner(String message, int color){
 
         for (int[] winPos : winPossibilities){
             if(     boxes[winPos[0]] == boxes[winPos[1]] &&
                     boxes[winPos[1]] == boxes[winPos[2]] &&
                     boxes[winPos[0]] != 2 ){
+
+                // If someone wins the game becomes inactive
+                isActive = false;
 
                 // Set message in Layout
                 TextView winnerMessage = findViewById(R.id.textWinner);
@@ -84,14 +78,35 @@ public class MainActivity extends AppCompatActivity {
 
                 // Show layout
                 LinearLayout layout = findViewById(R.id.playAgainLayout);
+                layout.setBackgroundColor(getResources().getColor(color));
                 layout.setVisibility(View.VISIBLE);
+                layout.animate().translationYBy(1000f).setDuration(500);
+            }else{
+                // When neither yellow nor red won
+                boolean gameIsOver = true;
 
+                // Only game is Over when the array boxes has values different of 2
+                for(int boxState : boxes){
+                    if(boxState == 2) gameIsOver = false;
+                }
+                if(gameIsOver){
+                    // Set message in Layout
+                    TextView winnerMessage = findViewById(R.id.textWinner);
+                    winnerMessage.setText("It's a draw");
+
+                    // Show layout
+                    LinearLayout layout = findViewById(R.id.playAgainLayout);
+                    layout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    layout.animate().translationYBy(1000f).setDuration(500);
+                    layout.setVisibility(View.VISIBLE);
+                }
             }
         }
     }
     // Reset the game
     public void playAgain(View view){
         LinearLayout layout = findViewById(R.id.playAgainLayout);
+        layout.animate().translationYBy(-1000f).setDuration(500);
         layout.setVisibility(View.INVISIBLE);
         turn = 0;
         isActive = true;
