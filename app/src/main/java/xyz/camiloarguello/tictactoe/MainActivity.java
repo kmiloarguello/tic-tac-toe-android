@@ -12,25 +12,32 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    int turn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        turn = 1;
     }
 
     public void dropInChip(View view){
         ImageView counter = (ImageView) view;
 
+        if(turn % 2 == 0){
+            counter.setImageResource(R.drawable.red);
+        }else{
+            counter.setImageResource(R.drawable.yellow);
+        }
+
         counter.setScaleX(0f);
         counter.setScaleY(0f);
-
-        counter.setImageResource(R.drawable.red);
-
         counter.animate()
                 .scaleX(1f)
                 .scaleY(1f)
                 .rotation(360f)
                 .setDuration(500);
+        turn++;
     }
 
 }
