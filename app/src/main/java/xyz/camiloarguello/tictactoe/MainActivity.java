@@ -1,12 +1,9 @@
 package xyz.camiloarguello.tictactoe;
 
-import android.media.Image;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         turn = 0;
         LinearLayout layout = findViewById(R.id.playAgainLayout);
         layout.setTranslationY(-1000f);
+
+        Toast.makeText(getApplicationContext(), "Reds start!", Toast.LENGTH_SHORT).show();
+
     }
 
     public void dropInChip(View view){
