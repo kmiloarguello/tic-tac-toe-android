@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     int turn;
     int[] boxes = {2,2,2,2,2,2,2,2,2};
     int[][] winPossibilities = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
+    boolean isActive = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         int tappedBox = Integer.parseInt(counter.getTag().toString());
 
         // If the box tapped has not tapped before
-        if(boxes[tappedBox] == 2){
+        if(boxes[tappedBox] == 2 && isActive){
 
             // Set the tapped box to true to prevent being tapped again
             boxes[tappedBox] = turn;
@@ -57,9 +58,21 @@ public class MainActivity extends AppCompatActivity {
                     .rotation(360f)
                     .setDuration(500);
 
+        }else{
+            boolean gameIsOver = true;
+
+            for(int boxState : boxes){
+                if(boxState == 2) gameIsOver = false;
+            }
+            if(gameIsOver){
+                decideWinner("It is a draw");
+            }
         }
     }
     public void decideWinner(String message){
+
+        isActive = false;
+
         for (int[] winPos : winPossibilities){
             if(     boxes[winPos[0]] == boxes[winPos[1]] &&
                     boxes[winPos[1]] == boxes[winPos[2]] &&
@@ -81,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout layout = findViewById(R.id.playAgainLayout);
         layout.setVisibility(View.INVISIBLE);
         turn = 0;
+        isActive = true;
         for(int i=0;i<boxes.length;i++){
             boxes[i] = 2;
         }
